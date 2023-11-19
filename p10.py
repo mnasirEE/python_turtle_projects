@@ -82,22 +82,28 @@ wn.onkey(lambda: player.setheading(0), "Right")
 wn.onkey(lambda: player.setheading(270), "Down")
 
 # Function to check for collision with maze walls
+# Function to check for collision with maze walls
 def is_collision(x, y):
-    if maze[int((y + 280) // 24)][int((x + 280) // 24)] == "X":
-        # Ensure indices are within bounds
-        # maze_row = int((y + 288) // 24)
-        # maze_col = int((x + 288) // 24)
+    maze_row = int((y + 288) // 24)
+    maze_col = int((x + 288) // 24)
 
-        # if 0 <= maze_row < len(maze) and 0 <= maze_col < len(maze[0]) and maze[maze_row][maze_col] == "X":
+    # Ensure indices are within bounds
+    if 0 <= maze_row < len(maze) and 0 <= maze_col < len(maze[0]):
+        return maze[maze_row][maze_col] == "X"
+    else:
+        return False
 
-          return True
-    return False
 
 # Function to check if the player has reached the goal
 def is_goal(x, y):
-    if maze[int((y + 288) // 24)][int((x + 288) // 24)] == "G":
-        return True
-    return False
+    maze_row = int((y + 288) // 24)
+    maze_col = int((x + 288) // 24)
+
+    # Ensure indices are within bounds
+    if 0 <= maze_row < len(maze) and 0 <= maze_col < len(maze[0]):
+        return maze[maze_row][maze_col] == "G"
+    else:
+        return False
 
 # Set up the maze
 setup_maze()
@@ -117,6 +123,6 @@ while True:
     if is_goal(player.xcor(), player.ycor()):
         player.goto(-288, 288)
         print("Congratulations! You reached the goal!")
-    turtle.done()    
+turtle.done()    
 
 
